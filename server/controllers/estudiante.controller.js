@@ -34,3 +34,9 @@ module.exports.deleteStudent = (req, res) => {
         .then(result => res.json({result: result}))
         .catch(err => res.json({message: "Hubo un error "+err}));
 }
+
+module.exports.findRandomStudent = (req, res) => {
+    Estudiante.aggregate([{ $sample: { size: 1 } }])
+        .then(student => res.json({estudiante: student}))
+        .catch(err => res.json({message: "Hubo un error "+err}));
+}
